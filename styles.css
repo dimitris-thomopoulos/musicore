@@ -1,0 +1,107 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+    background-color: #171717;
+}
+
+p,span,h1,h2,h3,h4,h5,h6,a,button {
+    color: white;
+}
+
+body *, input, textarea {
+    font-family: 'Manrope';
+}
+
+body h1,h2,h3,h4,h5,h6 {
+    font-family: 'Comfortaa' !important;
+    font-weight: bold;
+}
+
+img,button,a,iframe,video {
+    user-select: none !important;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+canvas {
+    border-radius: 30px;
+}
+
+
+.arrow {
+    width: 80px;
+    height: 500px;
+}
+
+.arrow.arrow-left {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background: linear-gradient(90deg, black, transparent);
+}
+
+.arrow.arrow-right {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    background: linear-gradient(-90deg, black, transparent);
+}
+
+.svg-left, .svg-right {
+    width: 50px;
+    height: 150px;
+    pointer-events: none;
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.arrow.arrow-left:hover ~ .svg-left, .arrow.arrow-right:hover ~ .svg-right {
+    transform: scale(1.2);
+    transition: transform 0.3s ease-in-out;   
+}
+
+img:-moz-broken {
+    opacity: 0;
+}

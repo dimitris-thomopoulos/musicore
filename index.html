@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>MusiCore - Favorite Artists</title>	
+	<link rel="icon" type="image/x-icon" href="/spotify.png">
+	<link rel="stylesheet" href="./styles.css">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+
+	<script src="p5.min.js">
+	</script>	
+</head>
+
+<body>
+
+	<h1 style="text-align: center; font-size: 30px; margin-top: 80px;">
+		Αγαπημένοι καλλιτέχνες
+	</h1>
+
+</body>
+
+<script>
+		
+	let img;
+	let description;
+	let audioDescription;
+	
+	const folder = "images/";
+	const filenames = 
+	[
+		"users-interactive-pc.jpg",
+		"ftm-navigation.jpg",
+		"ftm-tablet.jpg",
+		"vr-sequencer.jpg",
+		"cat.jpg"
+	];
+	
+	const imgDescriptions = 
+	[
+		"Two persons using a Virtual Environment application",
+		"Screenshot of a Virtual Reality museum",
+		"Using a VR museum in tablet",
+		"Screenshot of a VR music synthesis application",
+		"Photo of a cat"
+	];
+	
+	const audioFolder = "audio/";
+	
+	const audioFiles = 
+	[
+		"descr-01.mp3",
+		"descr-02.mp3",
+		"descr-03.mp3",
+		"descr-04.mp3",
+		"descr-05.mp3" //audio of cat
+	];
+	
+	let audioButtonImg;
+	const audioImg = ["audio-off-2.png", "audio-on-2.png"];
+	let audioSwitch = 1;
+	
+	let counter = 0;
+	
+	let arrowLeft;
+	let arrowRight;
+
+	let arrowLeftSvg;
+	let arrowRightSvg;
+
+	let video;
+	
+	
+	function preload() 
+	{
+		img = loadImage(folder + filenames[counter]);
+	}
+	
+	function setup() 
+	{
+		let canvas = createCanvas(800, 500);
+		canvas.position(1920/2 - 400, 1080/2 - 250 - 50);
+		
+		description = createSpan(imgDescriptions[counter]);
+		arrowLeft = createImg("images/arrow-left.png");
+		
+		arrowLeft.elt.classList.add('arrow');
+		arrowLeft.elt.classList.add('arrow-left');
+		
+		arrowRight = createImg("images/arrow-right.png");
+
+		arrowRight.elt.classList.add('arrow');
+		arrowRight.elt.classList.add('arrow-right');
+		
+		
+		arrowLeftSvg = createImg("images/arrow-left.svg");
+		arrowRightSvg = createImg("images/arrow-right.svg");
+
+		arrowLeftSvg.elt.classList.add('svg-left');
+		arrowRightSvg.elt.classList.add('svg-right');
+		
+		arrowLeft.mousePressed(pressedLeft);
+		arrowRight.mousePressed(pressedRight);
+		
+		//console.log(audioFolder+audioFiles[counter]);
+		audioDescription = createAudio(audioFolder+audioFiles[counter]);
+		audioDescription.play();
+		
+		// audioButtonImg = createImg(folder+audioImg[1]);
+		// audioButtonImg.mousePressed(audioSwitchF);
+		
+	}
+	
+	function draw()
+	{
+		clear();
+		image(img, 10, 10);
+
+		arrowLeftSvg.position(1920/2 - 390, 1080/2 - 120);
+		arrowRightSvg.position(1920/2 + 420 - 50, 1080/2 - 120);
+
+
+		arrowLeft.position(1920/2 - 400, 1080/2 - 250 - 50);
+		arrowRight.position(1920/2 + 400 - 50, 1080/2 - 250 - 50);
+		// audioButtonImg.position( 250, 360);
+	}
+
+	
+	function pressedLeft()
+	{
+		counter--;
+		
+		if (counter < 0)
+		{
+			counter = filenames.length-1;
+		}
+
+		img = loadImage(folder + filenames[counter]);
+		description.html(imgDescriptions[counter]);
+		
+		audioDescription.stop();
+		audioDescription = createAudio(audioFolder+audioFiles[counter]);
+		if (audioSwitch == 1)
+			audioDescription.play();
+	
+	}
+	
+	
+	function pressedRight()
+	{
+		counter++;
+		
+		if (counter >= filenames.length)
+		{
+			counter = 0;
+		}		
+
+		img = loadImage(folder + filenames[counter]);
+		description.html(imgDescriptions[counter]);
+		
+		audioDescription.stop();
+		audioDescription = createAudio(audioFolder+audioFiles[counter]);
+		if (audioSwitch == 1)
+			audioDescription.play();
+	
+	}
+
+	function keyPressed()
+	{
+		console.log(keyCode);
+	
+		if (keyCode == '37') 
+		{
+			pressedLeft();
+			mouseClicked();
+		} 
+		else if (keyCode == 39) 
+		{
+			pressedRight();
+			mouseClicked();
+		}
+		
+		if (keyCode == 32)
+			audioSwitchF();
+	}
+	
+	function audioSwitchF()
+	{
+		if (audioSwitch == 0)
+		{
+			audioSwitch = 1;
+			audioDescription.play();
+		}
+		else
+		{
+			audioSwitch = 0;
+			audioDescription.stop();
+		}
+			
+		audioButtonImg.remove();
+		audioButtonImg = createImg(folder+audioImg[audioSwitch]);
+		audioButtonImg.mousePressed(audioSwitchF);
+	}
+</script>
+
+</html>
