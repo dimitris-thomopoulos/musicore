@@ -2,31 +2,40 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>MusiCore - Favorite Artists</title>	
+	<title>MusiCore</title>	
 	<link rel="icon" type="image/x-icon" href="/spotify.png">
 	<link rel="stylesheet" href="./styles.css">
 	
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
 
-	<script src="p5.min.js">
-	</script>	
+	<script src="p5.min.js"></script>	
 </head>
 
 <body>
-
-	<h1 style="text-align: center; font-size: 30px; margin-top: 80px;">
-		Αγαπημένοι καλλιτέχνες
+	
+	<h1 class="title" style="text-align: center; font-size: 82px; padding-top: 80px;">
+	MUSICORE
 	</h1>
 
+	<h1 style="text-align: center; font-size: 56px; font-family: 'Bebas Neue' !important; padding-top: 80px;">
+		FEATURED ARTISTS
+	</h1>
+
+	<iframe width="830" height="500" src="https://www.youtube-nocookie.com/embed/sMPmcJ54_IM?start=10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	
+	<script src="sketch.js"></script>
 </body>
 
 <script>
 		
 	let img;
-	let description;
+	let artistName;
 	let audioDescription;
 	
 	const folder = "images/";
@@ -36,32 +45,48 @@
 		"ftm-navigation.jpg",
 		"ftm-tablet.jpg",
 		"vr-sequencer.jpg",
+		"cat.jpg",
+		"cat.jpg",
 		"cat.jpg"
 	];
 	
-	const imgDescriptions = 
+	const artists = 
 	[
-		"Two persons using a Virtual Environment application",
-		"Screenshot of a Virtual Reality museum",
-		"Using a VR museum in tablet",
-		"Screenshot of a VR music synthesis application",
-		"Photo of a cat"
+		"SHAHMEN",
+		"SADE",
+		"PRINCE OF FALLS",
+		"SASKE",
+		"KENDRICK LAMAR",
+		"6LACK",
+		"MARINA SATTI"
 	];
-	
-	const audioFolder = "audio/";
-	
-	const audioFiles = 
-	[
-		"descr-01.mp3",
-		"descr-02.mp3",
-		"descr-03.mp3",
-		"descr-04.mp3",
-		"descr-05.mp3" //audio of cat
+
+	const genres = [
+		"HIP-HOP/RAP",
+		"SOUL",
+		"HIP-HOP/RAP",
+		"HIP-HOP/RAP",
+		"HIP-HOP/RAP",
+		"HIP-HOP/RAP",
+		"POP - R&B"
 	];
-	
-	let audioButtonImg;
-	const audioImg = ["audio-off-2.png", "audio-on-2.png"];
-	let audioSwitch = 1;
+
+	const descriptions = [
+		"Shahmen is a duo made of producer SENSE, from Amsterdam, and rapper B L S aka Bless, from Los Angeles. The Shahmen sound is a dance between moments of pure tonal bliss and dark, hard, banging beats with original narratives. While traveling through the city of Amsterdam in the winter of 2006, B L S fatefully met SENSE. Like two old friends who had yet to meet, they recorded a song in an afternoon at SENSE’s houseboat studio, went out for the night in the city, slapped hands and parted ways. In the summer of 2007, B L S returned to the city of Amsterdam with one mission: make an album with SENSE. The two began working on their second song together. B L S casually mentioned to SENSE producing an entire project together, but SENSE was reluctant, saying he was already involved with too many projects to make any promises.",
+
+		"February 2010: Soldier of Love is released, the sixth studio album the band Sade have released during their 25 year career, and the first since Lovers Rock in 2000. For Sade herself, as the lynchpin of the group’s song writing effort, it’s a simple matter of integrity and authenticity: “I only make records when I feel I have something to say. I’m not interested in releasing music just for the sake of selling something. Sade is not a brand”. Sade’s first single, Your Love Is King, became a top 10 British hit in February 1984, and with that her life, and that of the band, changed forever. The unstressed, understated elegance of the music in conjunction with her look – unspecifically exotic and effortlessly sophisticated – launched Sade as the female face of the style decade. Magazines queued to put her on the cover. “It wasn’t marketing,” she says, wearily. “It was just me. And I wasn’t trying to promote an image.”",
+
+		"Emerging from the depths of London, Prince of Falls is a Nigerian born and Greenwich raised artist who's catchy mystical melodies range somewhere on the spectrum of dark R&B and intimate rap. The hypnotic beats take listeners into a more private corner of the human experience. Forever chilled yet pulsating with purpose, it is in this way that Prince of Falls is determined to reshape the UK music scene. To date, POF has released two projects, with 2019’s ‘Till We Feel Something’ - an eight track album that birthed his most popular song to date, “Marlboro” which has received 15M Spotify streams alone following its release. He then followed this up with 2021’s ‘Diary Of A Lonely Night’ which was a documentation of POF’s growing confidence as he slowly peeled back the layers to share a brighter, lighter side of his emotions.",
+		
+		"Defined by his unique aesthetics and sharp flows, Saske has been at the frontline of the greek rap scene since 2018 and his first major hit “Ksero Mana” which became double-platinum. Following then, the young rapper and performer has been evolved into a multi-platinum artist with a powerful catalog of street hits and club bangers such as Cyan, Ksero Mana, GOGO, NANA, Xorepse Mazi Mou, Dokimase Ton, and lastly the 2021 smash-hit “NASA” along with Rack.",
+
+		"Kendrick Lamar Duckworth (born June 17, 1987) is an American rapper and songwriter. His versatile cadence, internal rhyme schemes, and introspective songwriting have regarded him as one of the most influential hip hop artists of his generation. Lamar's discography explores styles that are unconventional to modern hip hop music such as jazz, funk, soul, and spoken word. His lyricism is inspired by his personal life and often contain political and social commentary centered around African American life and culture. Born and raised in Compton, California, Lamar began his career as a teenager under the stage name K.Dot. His debut mixtape, Y.H.N.I.C. (Hub City Threat Minor of the Year) (2004), garnered local attention and led to him signing with independent record label Top Dawg Entertainment (TDE) the following year.[5] In 2009, Lamar became a founding member of the hip hop supergroup Black Hippy alongside Ab-Soul, Jay Rock, and Schoolboy Q. He began to use his first and middle names professionally later that year, following the release of his eponymous debut extended play. He continued to gain recognition after his first retail release, Overly Dedicated, and his debut studio album, Section.80, which included his debut single 	'HiiiPoWeR'",
+
+		"Dazed slow jams are the primary mode of Atlanta-based contemporary R&B/rap artist Ricardo Valentine, a singer-slash-MC who goes by the name 6LACK ('black'). Prior to connecting with LVRN (Love Renaissance), the creative agency that has supported fellow Georgia native Raury, Valentine was signed to a label that he felt restricted his creativity. After a few years of being held back, he made significant gains -- across 2015 and 2016 -- with contributions to the Spillage Village compilation Bears Like This Too, as well as singles such as 'Bless Me' and 'Loyal.' Once 6LACK was linked with Interscope, 'Prblms' was officially released in September 2016 as his first major-label-affiliated track.",
+		
+		"Marina Satti was born in Athens, Greece to a Sudanese father and Cretan mother. She was raised in Heraklion, Crete in a culturally diverse environment that had a significant impact on her musical development, as well as on the multicultural nature of her artistic career. From a very early age, Satti showed an interest in music and drawing. She began classical piano training at the age of 7 and classical vocal training in high school, whilst also developing a passion for choral music. After finishing school, she moved to Athens to study architecture at the National Technical University of Athens. While in Athens, she studied theatre at the Veaki Drama School as well as at the Central Stage School of Drama and began studying jazz music at the Philippos Nakas Conservatory. In 2009, Satti earned her degree in classical piano and music theory and was awarded a distinction and first prize after completing her diploma in classical singing under professor Panos Dimas. That same year she represented Greece at the European Jazz Orchestra (EBU), performing the music of Peter Herbolzheimer across Europe. In 2010, she performed with the World Jazz Nonet at the John F. Kennedy Center in Washington D.C. and participated in the a cappella music group The Singing Tribe that sang alongside Bobby McFerrin. Having received a scholarship to study at Berklee College of Music, Marina Satti graduated in 2011, majoring in Contemporary Writing & Production, studying under Danilo Perez, Jamie Haddad, Simon Shaheen, John Patittuchi, and Christiane Karam among others. During her years at Berklee, she developed her signature musical style by combining elements of Greek, Arabic, and Balkan traditional music, all of which she grew up with from a very early age. In 2016, Satti released her single “Koupes”, an original, contemporary rendition of a traditional Asia Minor song. “Koupes” received widespread attention, reaching more than 22 million views on YouTube, and was included in Ravin & Bob Sinclar’s Buddha Bar: 20 Years Anniversary compilation album. In December 2016, Satti voiced the character of Moana in the Greek-language version of the Walt Disney animated picture Moana. Satti’s single “Mantissa”, released in May 2017, reached the top of the Greek and Bulgarian charts in less than one week. The song, composed and arranged by Satti, earned her an international deal with Universal Music Berlin and has reached more than 45 million views on YouTube to this day."
+	];
+
 	
 	let counter = 0;
 	
@@ -71,22 +96,41 @@
 	let arrowLeftSvg;
 	let arrowRightSvg;
 
-	let video;
+	let iframe;
+	iframe = document.getElementsByTagName('iframe')[0];
+
+	let iframeUrls;
+	iframeUrls = [
+		"https://www.youtube-nocookie.com/embed/sMPmcJ54_IM?start=10&autoplay=1",
+		"https://www.youtube-nocookie.com/embed/0iD9Hh8yOu8?autoplay=1",
+		"https://www.youtube-nocookie.com/embed/aaVGvZVuoL0?start=12&autoplay=1",
+		"https://www.youtube-nocookie.com/embed/7uxLrzaZufk?start=4&autoplay=1",
+		"https://www.youtube-nocookie.com/embed/hl3-ZPg-JAA?autoplay=1",
+		"https://www.youtube.com/embed/PEEhL9LaX4E?autoplay=1",
+		"https://www.youtube-nocookie.com/embed/ML8NZUuKGsU?autoplay=1"
+	];
 	
-	
-	function preload() 
-	{
-		img = loadImage(folder + filenames[counter]);
-	}
+	// function preload() 
+	// {
+	// 	img = loadImage(folder + filenames[counter]);
+	// }
 	
 	function setup() 
 	{
-		let canvas = createCanvas(800, 500);
-		canvas.position(1920/2 - 400, 1080/2 - 250 - 50);
+		// let canvas = createCanvas(800, 500);
+		// canvas.position(1920/2 - 400, 1080/2 - 250 - 50);
 		
-		description = createSpan(imgDescriptions[counter]);
+		artistName = createSpan(artists[counter]);
+
+		description = createSpan(descriptions[counter]);
+		description.elt.classList.add('description');
+
+		genre = createSpan(genres[counter]);
+		genre.elt.classList.add('genre');
+
 		arrowLeft = createImg("images/arrow-left.png");
-		
+
+
 		arrowLeft.elt.classList.add('arrow');
 		arrowLeft.elt.classList.add('arrow-left');
 		
@@ -106,8 +150,8 @@
 		arrowRight.mousePressed(pressedRight);
 		
 		//console.log(audioFolder+audioFiles[counter]);
-		audioDescription = createAudio(audioFolder+audioFiles[counter]);
-		audioDescription.play();
+		// audioDescription = createAudio(audioFolder+audioFiles[counter]);
+		// audioDescription.play();
 		
 		// audioButtonImg = createImg(folder+audioImg[1]);
 		// audioButtonImg.mousePressed(audioSwitchF);
@@ -117,14 +161,14 @@
 	function draw()
 	{
 		clear();
-		image(img, 10, 10);
+		// image(img, 10, 10);
 
-		arrowLeftSvg.position(1920/2 - 390, 1080/2 - 120);
-		arrowRightSvg.position(1920/2 + 420 - 50, 1080/2 - 120);
+		arrowLeftSvg.position(1920/2 - 390, 1080/2 -70 );
+		arrowRightSvg.position(1920/2 + 420 - 50, 1080/2 -70 );
 
 
-		arrowLeft.position(1920/2 - 400, 1080/2 - 250 - 50);
-		arrowRight.position(1920/2 + 400 - 50, 1080/2 - 250 - 50);
+		arrowLeft.position(1920/2 - 400, 1080/2 - 250);
+		arrowRight.position(1920/2 + 400 - 50, 1080/2 - 250);
 		// audioButtonImg.position( 250, 360);
 	}
 
@@ -138,13 +182,17 @@
 			counter = filenames.length-1;
 		}
 
-		img = loadImage(folder + filenames[counter]);
-		description.html(imgDescriptions[counter]);
+		// img = loadImage(folder + filenames[counter]);
+		artistName.html(artists[counter]);
+		description.html(descriptions[counter]);
+		genre.html(genres[counter]);
+
+		iframe.src = `${iframeUrls[counter]}`;
 		
-		audioDescription.stop();
-		audioDescription = createAudio(audioFolder+audioFiles[counter]);
-		if (audioSwitch == 1)
-			audioDescription.play();
+		// audioDescription.stop();
+		// audioDescription = createAudio(audioFolder+audioFiles[counter]);
+		// if (audioSwitch == 1)
+		// 	audioDescription.play();
 	
 	}
 	
@@ -158,13 +206,17 @@
 			counter = 0;
 		}		
 
-		img = loadImage(folder + filenames[counter]);
-		description.html(imgDescriptions[counter]);
+		// img = loadImage(folder + filenames[counter]);
+		artistName.html(artists[counter]);
+		description.html(descriptions[counter]);
+		genre.html(genres[counter]);
+
+		iframe.src = `${iframeUrls[counter]}`;
 		
-		audioDescription.stop();
-		audioDescription = createAudio(audioFolder+audioFiles[counter]);
-		if (audioSwitch == 1)
-			audioDescription.play();
+		// audioDescription.stop();
+		// audioDescription = createAudio(audioFolder+audioFiles[counter]);
+		// if (audioSwitch == 1)
+		// 	audioDescription.play();
 	
 	}
 
@@ -182,28 +234,30 @@
 			pressedRight();
 			mouseClicked();
 		}
+
+		iframe.src = `${iframeUrls[counter]}`;
 		
-		if (keyCode == 32)
-			audioSwitchF();
+		// if (keyCode == 32)
+		// 	audioSwitchF();
 	}
 	
-	function audioSwitchF()
-	{
-		if (audioSwitch == 0)
-		{
-			audioSwitch = 1;
-			audioDescription.play();
-		}
-		else
-		{
-			audioSwitch = 0;
-			audioDescription.stop();
-		}
+	// function audioSwitchF()
+	// {
+	// 	if (audioSwitch == 0)
+	// 	{
+	// 		audioSwitch = 1;
+	// 		audioDescription.play();
+	// 	}
+	// 	else
+	// 	{
+	// 		audioSwitch = 0;
+	// 		audioDescription.stop();
+	// 	}
 			
-		audioButtonImg.remove();
-		audioButtonImg = createImg(folder+audioImg[audioSwitch]);
-		audioButtonImg.mousePressed(audioSwitchF);
-	}
+	// 	audioButtonImg.remove();
+	// 	audioButtonImg = createImg(folder+audioImg[audioSwitch]);
+	// 	audioButtonImg.mousePressed(audioSwitchF);
+	// }
 </script>
 
 </html>

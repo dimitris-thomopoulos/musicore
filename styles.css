@@ -43,6 +43,7 @@ table {
 }
 
 body {
+    height: 100vh;
     background-color: #171717;
 }
 
@@ -55,8 +56,27 @@ body *, input, textarea {
 }
 
 body h1,h2,h3,h4,h5,h6 {
-    font-family: 'Comfortaa' !important;
+    font-family: 'Righteous' !important;
+    letter-spacing: 2px;
     font-weight: bold;
+}
+
+main {
+    display: none !important;
+}
+
+main + span {
+    display: block;
+    text-align: center;
+    font-family: 'Bebas Neue';
+    font-size: 42px;
+    margin: 50px 0;
+    letter-spacing: 2px;
+}
+
+::selection {
+    background-color: #1ed760;
+    color: black;
 }
 
 img,button,a,iframe,video {
@@ -66,11 +86,6 @@ img,button,a,iframe,video {
 img:hover {
     cursor: pointer;
 }
-
-canvas {
-    border-radius: 30px;
-}
-
 
 .arrow {
     width: 80px;
@@ -94,14 +109,75 @@ canvas {
     height: 150px;
     pointer-events: none;
     transform: scale(1);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .arrow.arrow-left:hover ~ .svg-left, .arrow.arrow-right:hover ~ .svg-right {
     transform: scale(1.2);
-    transition: transform 0.3s ease-in-out;   
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.arrow, .svg-left, .svg-right {
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+iframe:hover, iframe:hover ~ .arrow, iframe:hover ~ .svg-left, iframe:hover ~ .svg-right,
+.arrow:hover ~ .svg-left, .arrow:hover, .svg-left:hover, .arrow:hover ~ .svg-right, .svg-right:hover {
+    opacity: 1;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 img:-moz-broken {
     opacity: 0;
+}
+
+iframe {
+    border-radius: 30px;
+    position: absolute;
+    left: 560px !important;
+    top: 290px !important;
+}
+
+.html5-video-player .video-click-tracking, .html5-video-player, .html5-main-video, .video-stream {
+    top: 0 !important;
+    height: 518px !important;
+}
+
+.genre {
+    display: block;
+    color: #28b47f;
+    text-align: center;
+    font-family: 'Comfortaa';
+    font-size: 16px;
+    margin-top: -42px;
+    letter-spacing: 1px;
+}
+
+.title {
+    text-align: center;
+    font-size: 82px !important;
+    right: 50px !important;
+    writing-mode: vertical-rl;
+    top: 340px !important;
+    padding-top: 0px !important;
+    position: absolute;
+}
+
+span.description {
+    display: -webkit-box;
+    -webkit-line-clamp: 18;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    color: #c9c9c9;
+    text-orientation: sideways;
+    line-height: 1.7;
+    position: absolute;
+    left: 200px;
+    top: 300px;
+    max-width: 320px;
+    text-align: justify;
+    text-align-last: right;
 }
